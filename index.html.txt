@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive PIP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: #1f2937; }
+    .form-section { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+    .section-title { font-weight: 700; font-size: 18px; color: #1e40af; margin-bottom: 12px; border-bottom: 2px solid #dbeafe; padding-bottom: 6px; }
+    .field-label { font-weight: 600; margin-bottom: 4px; display: block; font-size: 14px; }
+    .input-field, .textarea-field { width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 15px; }
+    .input-field:focus, .textarea-field:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+    .textarea-field { min-height: 120px; resize: vertical; }
+    .submit-btn { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; border: none; cursor: pointer; }
+    .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+    .guidance-box { background: #e0f2fe; border-left: 4px solid #0ea5e9; padding: 16px; border-radius: 8px; margin-bottom: 20px; }
+    .warning-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 8px; margin-bottom: 20px; }
+    .success-message { display: none; background: #d1fae5; border-left: 4px solid #10b981; padding: 16px; border-radius: 8px; margin-bottom: 20px; }
+    .signature-section { border-top: 2px solid #e5e7eb; padding-top: 16px; margin-top: 16px; }
+    .disclaimer-box { background: #f9fafb; border: 1px solid #e5e7eb; padding: 16px; border-radius: 8px; font-size: 12px; color: #6b7280; margin-bottom: 20px; }
+  </style>
+</head>
+<body class="h-full">
+  <div class="max-w-3xl mx-auto p-6">
+    <div class="form-section text-center bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+      <h1 class="text-3xl font-bold mb-2">Performance Improvement Plan</h1>
+      <p class="opacity-90">Your Company Name</p>
+    </div>
+    <div class="success-message" id="success-message">
+      <p class="font-semibold text-green-800 mb-2">✓ PIP Saved Successfully</p>
+      <p class="text-green-700 text-sm">This PIP has been documented and saved.</p>
+    </div>
+    <div class="guidance-box">
+      <p class="font-semibold text-blue-800 mb-2">📋 Documentation Guidelines</p>
+      <ul class="text-blue-900 text-sm list-disc pl-5">
+        <li>Use objective, measurable performance metrics</li>
+        <li>Keep language neutral and professional</li>
+        <li>Reference company policies and job expectations</li>
+      </ul>
+    </div>
+    <form id="pip-form">
+      <!-- Employee Information -->
+      <div class="form-section">
+        <h2 class="section-title">Employee Information</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div><label class="field-label" for="employee_name">Employee Name *</label><input class="input-field" type="text" id="employee_name" name="employee_name" required></div>
+          <div><label class="field-label" for="job_title">Job Title *</label><input class="input-field" type="text" id="job_title" name="job_title" required></div>
+          <div><label class="field-label" for="department">Department *</label><input class="input-field" type="text" id="department" name="department" required></div>
+          <div><label class="field-label" for="manager_name">Manager Name *</label><input class="input-field" type="text" id="manager_name" name="manager_name" required></div>
+          <div><label class="field-label" for="pip_date">PIP Date *</label><input class="input-field" type="date" id="pip_date" name="pip_date" required></div>
+        </div>
+      </div>
+
+      <!-- Performance Concerns -->
+      <div class="form-section">
+        <h2 class="section-title">Performance Concerns</h2>
+        <label class="field-label" for="performance_concerns">Description of Performance Issues *</label>
+        <textarea class="textarea-field" id="performance_concerns" name="performance_concerns" required placeholder="Describe specific, observable behaviors..."></textarea>
+      </div>
+
+      <!-- Performance Expectations -->
+      <div class="form-section">
+        <h2 class="section-title">Performance Expectations & Required Actions</h2>
+        <label class="field-label" for="performance_expectations">Clear, Measurable Performance Expectations *</label>
+        <textarea class="textarea-field" id="performance_expectations" name="performance_expectations" required placeholder="Define specific, measurable success criteria..."></textarea>
+      </div>
+
+      <!-- Support & Resources -->
+      <div class="form-section">
+        <h2 class="section-title">Support & Resources Provided</h2>
+        <label class="field-label" for="support_resources">Training, Coaching, Tools, and Support *</label>
+        <textarea class="textarea-field" id="support_resources" name="support_resources" required placeholder="Document all resources provided..."></textarea>
+      </div>
+
+      <!-- Review Timeline -->
+      <div class="form-section">
+        <h2 class="section-title">Review Period & Timeline</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div><label class="field-label" for="review_period">PIP Duration *</label><input class="input-field" type="text" id="review_period" name="review_period" required placeholder="Example: 90 days"></div>
+          <div><label class="field-label" for="checkin_dates">Scheduled Check-In Dates *</label><input class="input-field" type="text" id="checkin_dates" name="checkin_dates" required placeholder="Example: Week 2, Week 4..."></div>
+        </div>
+        <label class="field-label" for="consequences">Outcome of Not Meeting Expectations *</label>
+        <textarea class="textarea-field" id="consequences" name="consequences" required placeholder="State consequences clearly..."></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center mb-6">
+        <button type="submit" class="submit-btn">Save PIP</button>
+      </div>
+    </form>
+
+    <div class="disclaimer-box">
+      <p class="font-semibold">Legal Disclaimer</p>
+      <p>This Performance Improvement Plan is for documentation and HR purposes only. It is not a contract of employment and does not guarantee any outcome. Consult qualified HR or legal professionals for advice.</p>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById('pip-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById('success-message').style.display = 'block';
+      setTimeout(()=>{document.getElementById('success-message').style.display='none';},5000);
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
